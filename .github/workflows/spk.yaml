@@ -1,0 +1,34 @@
+name: Build package
+
+on:
+    push:
+        branches:
+            - main
+            - develop
+            - 'release/**'
+            - 'feature/**'
+
+jobs:
+    Build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - name: GitVersion Setup
+              uses: gittools/actions/gitversion/setup@v0
+              with:
+                  versionSpec: '5.x'
+            - name: GitVersion Run
+              id: gitversion
+              uses: gittools/actions/gitversion/execute@v0
+            - name: GitVersion Save
+              run: |
+                  echo "SemVer: ${{ steps.gitversion.outputs.fullSemVer }}"
+                  echo "${{ steps.gitversion.outputs.fullSemVer  }}" > VERSION
+            - name: Build Package
+              uses: tomgrv/synology-package-builder@v1
+              with:
+                  arch: 'avoton'
