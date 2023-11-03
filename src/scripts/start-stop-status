@@ -1,29 +1,21 @@
-#!/bin/sh
-# Copyright (C) 2000-2016 Synology Inc. All rights reserved.
+#!/bin/bash
+GITLAB_NAME="GithubRunner"
+DOCKER_INSPECT="/usr/local/bin/docker_inspect"
 
-case $1 in
-	start)
-		### Start this package.
-		minimalPkg "Start"
-		exit 0
-	;;
-	stop)
-		### Stop this package.
-		minimalPkg "Stop"
-		exit 0
-	;;
-	status)
-		### Check package alive.
-		if [ -h "/usr/bin/minimalPkg" ]; then
-			exit 0
-		else
-			exit 1
-		fi
-	;;
-	killall)
+case "$1" in
+    start)
         ;;
-	log)
-		exit 0
-	;;
+    stop)
+        ;;
+    status)
+        "$DOCKER_INSPECT" "$GITLAB_NAME" | grep -q "\"Status\": \"running\"," || exit 1
+        ;;
+    log)
+        echo ""
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|status}" >&2
+        exit 1
+        ;;
 esac
-
+exit 0

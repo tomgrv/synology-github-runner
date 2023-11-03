@@ -1,6 +1,4 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/python:3",
-    // Add the IDs of extensions you want installed when the container is created.
     "customizations": {
         "vscode": {
             "extensions": [
@@ -13,21 +11,7 @@
                 "GitHub.codespaces",
                 "Gruntfuggly.todo-tree"
             ],
-            "settings": {
-                "remote.autoForwardPorts": false
-            }
         }
     },
-    "runArgs": [
-        "--privileged"
-    ],
-    "remoteUser": "root",
-    "postCreateCommand": "apt-get update && apt-get install cifs-utils -y",
-    // install nodejs
-    "features": {
-        "ghcr.io/devcontainers/features/node:1": {},
-        "ghcr.io/devcontainers/features/git:1": {},
-        "ghcr.io/devcontainers/features/github-cli:1": {},
-        "ghcr.io/devcontainers/features/sshd:1": {}
-    }
+    "postStartCommand": "curl -sL https://raw.githubusercontent.com/tomgrv/devutils/main/install.sh | bash "
 }

@@ -2,15 +2,15 @@
 # Copyright (C) 2000-2016 Synology Inc. All rights reserved.
 
 case ${MakeClean} in
-	[Yy][Ee][Ss])
-		make clean
-		;;
+    [Yy][Ee][Ss])
+        make clean
+        ;;
 esac
 
-# You can use CC CFLAGS LD LDFLAGS CXX CXXFLAGS AR RANLIB READELF STRIP here
-echo "${CC} ${CFLAGS} minimalPkg.c -o minimalPkg.dummy"
-${CC} ${CFLAGS} minimalPkg.c -o minimalPkg.dummy
+case ${CleanOnly} in
+    [Yy][Ee][Ss])
+        return
+        ;;
+esac
 
-# Or you can use Makefile to genarate executable.
-echo "make ${MAKE_FLAGS}"
 make ${MAKE_FLAGS}

@@ -1,10 +1,20 @@
 #!/bin/sh
-# Copyright (C) 2000-2016 Synology Inc. All rights reserved.
+PKG_NAME="GithubRunner"
+PORT_CONFIG_FILE="/var/packages/$PKG_NAME/etc/port_config"
 
-### This script will be executed when package installed and upgraded.
-### Actions after package installed.
-### ex. create database, create symbolic link...
+port=""
+if [ ! -z "$wizard_http_port" ]; then
+    # new install
+    port="$wizard_http_port"
+elif [ -f "$PORT_CONFIG_FILE" ]; then
+    # upgrade
+    port=$(get_key_value "$PORT_CONFIG_FILE" port)
+fi
 
-ln -sf $SYNOPKG_PKGDEST/usr/bin/minimalPkg /usr/bin/
+echo "port=$port" > $PORT_CONFIG_FILE
+
+if [ -f "$SYNOPKG_PKGDEST/app/config" ]; then
+    sed -i "s/@PORT@/$port/g" "$SYNOPKG_PKGDEST/ui/config"
+fi
 
 exit 0

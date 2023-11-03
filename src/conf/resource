@@ -1,0 +1,19 @@
+{
+    "docker": {
+        "services": [
+            {
+                "service": "Github",
+                "image": "myoung34/github-runner",
+                "container_name": "GithubRunner",
+                "tag": "latest",
+                "restart": "always",
+                "shares": [
+                    {
+                        "host_dir": "gitlab/data",
+                        "mount_point": "/var/run/docker.sock"
+                    }
+                ]
+            }
+        ]
+    }
+}
