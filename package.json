@@ -1,0 +1,123 @@
+{
+    "scripts": {
+        "lint": "npx --yes lint-staged -p false",
+        "release": "npx --yes commit-and-tag-version --no-verify --"
+    },
+    "config": {
+        "commitizen": {
+            "path": "@commitlint/cz-commitlint"
+        }
+    },
+    "prettier": {
+        "insertPragma": true,
+        "overrides": [
+            {
+                "files": "*.yml",
+                "options": {
+                    "useTabs": true,
+                    "tabWidth": 2
+                }
+            }
+        ],
+        "plugins": [
+            "prettier-plugin-sh"
+        ],
+        "semi": false,
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5"
+    },
+    "commit-and-tag-version": {
+        "bumpFiles": [
+            {
+                "filename": "composer.json",
+                "type": "json"
+            },
+            {
+                "filename": "package.json",
+                "type": "json"
+            },
+            {
+                "filename": "VERSION",
+                "type": "plain-text"
+            }
+        ],
+        "types": [
+            {
+                "section": "Features",
+                "type": "feat"
+            },
+            {
+                "section": "Bug Fixes",
+                "type": "fix"
+            },
+            {
+                "hidden": true,
+                "type": "chore"
+            },
+            {
+                "hidden": true,
+                "type": "docs"
+            },
+            {
+                "hidden": true,
+                "type": "style"
+            },
+            {
+                "hidden": true,
+                "type": "refactor"
+            },
+            {
+                "hidden": true,
+                "type": "perf"
+            },
+            {
+                "hidden": true,
+                "type": "test"
+            }
+        ]
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional",
+            "@commitlint/config-workspace-scopes"
+        ],
+        "rules": {
+            "subject-case": [
+                2,
+                "never",
+                [
+                    "start-case",
+                    "pascal-case",
+                    "upper-case"
+                ]
+            ]
+        }
+    },
+    "git-precommit-checks": {
+        "rules": [
+            {
+                "message": "You've got leftover conflict markers",
+                "regex": "/^[<>|=]{4,}/m"
+            },
+            {
+                "filter": "(^package\\.json|\\.git-precommit-checks.json)$",
+                "message": "You have unfinished devs",
+                "nonBlocking": "true",
+                "regex": "(?:FIXME|TODO)"
+            }
+        ]
+    },
+    "lint-staged": {
+        "*.json": [
+            "normalize-json -c -w -a -i -f local -l true",
+            "npx --yes prettier --write"
+        ],
+        "*.php": [
+            "composer lint"
+        ],
+        "*.{js,jsx,ts,tsx,md,html,css,vue,yaml,yml}": [
+            "npx --yes prettier --write"
+        ]
+    }
+}
