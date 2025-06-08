@@ -1,0 +1,48 @@
+{
+    "name": "github-runner",
+    "cmd": "",
+    "cpu_priority": "90",
+    "enable_publish_all_ports": false,
+    "enable_restart_policy": true,
+    "env_variables": [
+        {
+            "key": "ACCESS_TOKEN",
+            "value": "{{wizard.access_token}}"
+        },
+        {
+            "key": "RUNNER_WORKDIR",
+            "value": "/tmp/github-runner"
+        },
+        {
+            "key": "RUNNER_ALLOW_RUNASROOT",
+            "value": "true"
+        },
+        {
+            "key": "RUNNER_SCOPE",
+            "value": "org"
+        },
+        {
+            "key": "ORG_NAME",
+            "value": "{{wizard.org_name}}"
+        },
+        {
+            "key": "LABELS",
+            "value": "{{wizard.labels}}"
+        }
+    ],
+    "image": "myoung34/github-runner:2.325.0",
+    "is_package": true,
+    "memory_limit": 0,
+    "port_bindings": [],
+    "privileged": true,
+    "shortcut": {
+        "enable_shortcut": false
+    },
+    "volume_bindings": [
+        {
+            "host_absolute_path": "/var/run/docker.sock",
+            "mount_point": "/var/run/docker.sock",
+            "type": "rw"
+        }
+    ]
+}

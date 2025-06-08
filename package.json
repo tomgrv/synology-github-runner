@@ -1,6 +1,10 @@
 {
+    "name": "github-runner",
+    "version": "2.325.0+1.0.0",
+    "description": "Run GitHub Actions jobs on your Synology NAS using myoung34/github-runner docker image.",
+    "license": "MIT",
     "scripts": {
-        "lint": "npx --yes lint-staged -p false",
+        "lint": "npx --yes lint -staged -p false",
         "release": "npx --yes commit-and-tag-version --no-verify --"
     },
     "config": {
@@ -119,5 +123,15 @@
         "*.{js,jsx,ts,tsx,md,html,css,vue,yaml,yml}": [
             "npx --yes prettier --write"
         ]
-    }
+    },
+    "synology": {
+        "displayname": "Github Runner",
+        "distributor": "tomgrv/synology-github-runner",
+        "distributor_url": "https://github.com/tomgrv/synology-github-runner",
+        "maintainer": "myoung34/docker-github-actions-runner",
+        "maintainer_url": "https://github.com/myoung34/docker-github-actions-runner",
+        "os_min_ver": "7.0-40337",
+        "support_url": "https://github.com/tomgrv/synology-github-runner/issues"
+    },
+    "target": "./src"
 }

@@ -1,0 +1,8 @@
+{
+    "docker": [
+        {
+            "profile": "./docker/github-runner.json",
+            "preload": false
+        }
+    ]
+}
