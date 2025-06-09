@@ -16,14 +16,14 @@ This package allows you to run GitHub Actions on your Synology NAS. It uses the 
 
 4. Follow the installation instructions.
 
-> The package will go in error state initially, but this is expected as it needs to be elevated to run properly.
+**The package will go in error state initially, but this is expected as it needs to be elevated to run properly.**
 
-5. Elevate the package by following the instructions in the [Elevate Package](https://github.com/tomgrv/synology-package-builder/blob/main/doc/elevated.md)
+5. Elevate the package by following the instructions from the [Synology Package Builder](https://github.com/tomgrv/synology-package-builder/blob/main/doc/elevated.md)
 
 6. After elevation, the package will:
-    - Download the docker image
-    - Create a Docker container in the Container Manager
-    - Start the GitHub Runner as configured.
+    - Download the docker image (takes a while, you shoud receive a notification from Container Manager when done)
+    - Create a Docker container in the Container Manager. This container will be read-only and named `github-runner`
+    - Behave as a regular Package, allowing you to start/stop it from the Package Center.
 
 ## Credits
 
@@ -34,3 +34,5 @@ This package was created using the [Synology Package Builder Github Action](http
 ## License
 
 This package is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+This work is not affiliated with Synology Inc. in any way. It is an independent project that aims to facilitate the development of Synology packages using GitHub Actions. It is not an official Synology product and does not have any official support from Synology Inc. Use at your own risk.
