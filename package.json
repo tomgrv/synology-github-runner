@@ -38,7 +38,7 @@
         "bumpFiles": [
             {
                 "filename": "package.json",
-                "updater": "json-withmetadata"
+                "updater": "json-keepmetadata"
             },
             {
                 "filename": "VERSION",
