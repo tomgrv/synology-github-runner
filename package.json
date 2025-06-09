@@ -1,6 +1,6 @@
 {
     "name": "github-runner",
-    "version": "2.325.0+1.0.0",
+    "version": "0.2.0+2.325.0",
     "description": "Run GitHub Actions jobs on your Synology NAS using myoung34/github-runner docker image.",
     "license": "MIT",
     "scripts": {
@@ -11,6 +11,9 @@
         "commitizen": {
             "path": "@commitlint/cz-commitlint"
         }
+    },
+    "devDependencies": {
+        "commit-and-tag-version": "^12.5.1"
     },
     "prettier": {
         "insertPragma": true,
@@ -34,12 +37,8 @@
     "commit-and-tag-version": {
         "bumpFiles": [
             {
-                "filename": "composer.json",
-                "type": "json"
-            },
-            {
                 "filename": "package.json",
-                "type": "json"
+                "updater": "json-withmetadata"
             },
             {
                 "filename": "VERSION",
