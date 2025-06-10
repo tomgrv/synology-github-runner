@@ -7,7 +7,7 @@
                 "desc": "Runner Configuration",
                 "subitems": [
                     {
-                        "key": "wizard_access_token",
+                        "key": "access_token",
                         "desc": "Runner Access Token",
                         "defaultValue": "",
                         "validator": {
@@ -17,7 +17,7 @@
                         }
                     },
                     {
-                        "key": "wizard_org_name",
+                        "key": "org_name",
                         "desc": "Runner Organisation Name",
                         "validator": {
                             "regex": {
@@ -28,7 +28,7 @@
                         }
                     },
                     {
-                        "key": "wizard_labels",
+                        "key": "labels",
                         "desc": "Runner Labels",
                         "emptyText": "synology",
                         "validator": {
