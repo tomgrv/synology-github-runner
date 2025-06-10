@@ -43,14 +43,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Download Package Artifact
         uses: actions/download-artifact@v4
         with:
           path: ./dist
+      - uses: rickstaa/action-contains-tag@v1
+        id: is_on_main
+        with:
+          reference: 'main'
+          tag: '${{ github.ref }}'
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v2.2.2
         with:
-          files: ./dist/*.spk
-          draft: false
-          prerelease: false
+          files: ./dist/**/*.spk
+          draft: ${{ steps.is_on_main.outputs.retval != 'true' }}
+          prerelease: ${{ contains(github.ref, '-') }}
+          fail_on_unmatched_files: true
+          generate_release_notes: true
+          body_path: CHANGELOG.md
