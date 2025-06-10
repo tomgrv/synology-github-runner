@@ -125,9 +125,9 @@
     },
     "synology": {
         "displayname": "Github Runner",
-        "distributor": "tomgrv/synology-github-runner",
+        "distributor": "github.com/tomgrv",
         "distributor_url": "https://github.com/tomgrv/synology-github-runner",
-        "maintainer": "myoung34/docker-github-actions-runner",
+        "maintainer": "github.com/myoung34",
         "maintainer_url": "https://github.com/myoung34/docker-github-actions-runner",
         "os_min_ver": "7.0-40337",
         "support_url": "https://github.com/tomgrv/synology-github-runner/issues"
