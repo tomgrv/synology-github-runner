@@ -4,6 +4,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.2.1](https://github.com/tomgrv/synology-github-runner/compare/v0.2.0...v0.2.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* 🐛 release feature ([970711f](https://github.com/tomgrv/synology-github-runner/commit/970711f6cbf90389a436149fb756b3256dff7d9f))
+
 ## 0.2.0 (2025-06-09)
 
 ### Features
