@@ -7,15 +7,11 @@
     "env_variables": [
         {
             "key": "ACCESS_TOKEN",
-            "value": "{{wizard.access_token}}"
+            "value": "{{access_token}}"
         },
         {
             "key": "RUNNER_WORKDIR",
-            "value": "/tmp/github-runner"
-        },
-        {
-            "key": "RUNNER_ALLOW_RUNASROOT",
-            "value": "true"
+            "value": "{{SYNOPKG_PKGTMP}}"
         },
         {
             "key": "RUNNER_SCOPE",
@@ -23,14 +19,14 @@
         },
         {
             "key": "ORG_NAME",
-            "value": "{{wizard.org_name}}"
+            "value": "{{org_name}}"
         },
         {
             "key": "LABELS",
-            "value": "{{wizard.labels}}"
+            "value": "{{labels}}"
         }
     ],
-    "image": "myoung34/github-runner:2.325.0",
+    "image": "myoung34/github-runner:2.325.0-ubuntu-noble",
     "is_package": true,
     "memory_limit": 0,
     "port_bindings": [],
@@ -40,8 +36,13 @@
     },
     "volume_bindings": [
         {
-            "host_absolute_path": "/var/run/docker.sock",
+            "host_absolute_path": "{{DOCKER_SOCKET}}",
             "mount_point": "/var/run/docker.sock",
+            "type": "rw"
+        },
+        {
+            "host_absolute_path": "{{SYNOPKG_PKGTMP}}",
+            "mount_point": "{{SYNOPKG_PKGTMP}}",
             "type": "rw"
         }
     ]
