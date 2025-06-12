@@ -25,6 +25,14 @@ This package allows you to run GitHub Actions on your Synology NAS. It uses the 
     - Create a Docker container in the Container Manager. This container will be read-only and named `github-runner`
     - Behave as a regular Package, allowing you to start/stop it from the Package Center.
 
+## Usage
+
+See [dist folder](dist) for exemples of how to use the package:
+
+- How to use [matrix](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/running-variations-of-jobs-in-a-workflow) to send jobs to the runner by specifying dynamicaly the `runs-on` key
+- How to use [setup-php](shivammathur/setup-php) to configure and PHP jobs on the runner (1st run can take a while, as it will download the PHP versions and extensions)
+- How to use [setup-node](actions/setup-node) to configure Node.js jobs on the runner (1st run can take a while, as it will download the Node.js versions and extensions)
+
 ## Credits
 
 This package is based on the work of [myoung34](https://github.com/myoung34)

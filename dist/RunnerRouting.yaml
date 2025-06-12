@@ -1,0 +1,47 @@
+# @format
+
+name: Deploy
+
+on:
+    push:
+
+run-name: Publish on ${{ github.ref_name }}
+jobs:
+    list-tasks:
+        runs-on: ubuntu-latest
+        outputs:
+            tasks: ${{ steps.parse.outputs.tasks }}
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+            - name: Parse Deploy Config
+              id: parse
+              run: |
+                  echo "tasks=[ { \"name\": \"task1\" , \"runs-on\" : "self-hosted" } , {\"name\": \"task1\" , \"runs-on\" : "ubuntu"}]" >> $GITHUB_OUTPUT
+    deploy-hosts:
+        runs-on: ${{  matrix.task.runs-on || 'ubuntu-latest'  }}
+        strategy:
+            fail-fast: false
+            matrix:
+                task: ${{ fromJson(needs.list-tasks.outputs.tasks) }}
+        needs: list-hosts
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.3'
+                  extensions: mbstring, intl, xml, zip, curl, gd
+              env:
+                  update: true
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+            - name: Echo Task Name in PHP
+              run: |
+                  php -r "echo 'Task Name: ' . getenv('TASK') . PHP_EOL;"
+              shell: bash
+              env:
+                  TASK: ${{ matrix.task.name }}
