@@ -4,6 +4,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.0-beta.1](https://github.com/tomgrv/synology-github-runner/compare/v0.2.1...v0.3.0-beta.1) (2025-06-13)
+
+
+### Features
+
+* ✨ persist data ([796aee9](https://github.com/tomgrv/synology-github-runner/commit/796aee93e631cf9d3c3e7a8feb11ae2b2e887922))
+
 ## [0.2.1](https://github.com/tomgrv/synology-github-runner/compare/v0.2.0...v0.2.1) (2025-06-10)
 
 
