@@ -8,7 +8,7 @@
                 "subitems": [
                     {
                         "key": "access_token",
-                        "desc": "Runner Access Token",
+                        "desc": "Personnal Access Token",
                         "defaultValue": "",
                         "validator": {
                             "allowBlank": false,

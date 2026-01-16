@@ -11,7 +11,7 @@
         },
         {
             "key": "RUNNER_WORKDIR",
-            "value": "{{SYNOPKG_PKGTMP}}"
+            "value": "/tmp/github-runner-workdir"
         },
         {
             "key": "RUNNER_SCOPE",
@@ -22,11 +22,23 @@
             "value": "{{org_name}}"
         },
         {
+            "key": "RUNNER_NAME",
+            "value": "{{org_name}}"
+        },
+        {
             "key": "LABELS",
             "value": "{{labels}}"
+        },
+        {
+            "key": "RUNNER_ALLOW_RUNASROOT",
+            "value": "true"
+        },
+        {
+            "key": "CONFIGURED_ACTIONS_RUNNER_FILES_DIR",
+            "value": "{{SYNOPKG_PKGHOME}}"
         }
     ],
-    "image": "myoung34/github-runner:2.325.0-ubuntu-noble",
+    "image": "myoung34/github-runner:2.331.0-ubuntu-noble",
     "is_package": true,
     "memory_limit": 0,
     "port_bindings": [],
@@ -42,7 +54,7 @@
         },
         {
             "host_absolute_path": "{{SYNOPKG_PKGTMP}}",
-            "mount_point": "{{SYNOPKG_PKGTMP}}",
+            "mount_point": "/tmp/github-runner-workdir",
             "type": "rw"
         }
     ]
