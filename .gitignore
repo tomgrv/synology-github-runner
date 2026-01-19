@@ -20,3 +20,8 @@ bin
 obj
 ./.gitattributes
 .github/workflows/.secrets
+
+## Synology
+@eaDir
+.DS_Store
+*.spk
