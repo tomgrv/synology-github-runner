@@ -8,7 +8,7 @@ This package allows you to run GitHub Actions on your Synology NAS. It uses the 
 
 ## Installation
 
-1. Download the package from the [Releases](https://github.com/tomgrv/github-runner-synology/releases) page.
+1. Download the package from the [Releases](https://github.com/tomgrv/synology-github-runner/releases) page.
 
 2. Open the Synology Package Center.
 
@@ -16,14 +16,27 @@ This package allows you to run GitHub Actions on your Synology NAS. It uses the 
 
 4. Follow the installation instructions.
 
-**The package will go in error state initially, but this is expected as it needs to be elevated to run properly.**
+**The package installs cleanly but stays stopped: DSM 7 does not allow unsigned packages to manage Docker containers, so it needs a one-time approval to run.**
 
-5. Elevate the package by following the instructions from the [Synology Package Builder](https://github.com/tomgrv/synology-package-builder/blob/main/doc/elevated.md)
+5. Approve the package from a root shell (SSH):
 
-6. After elevation, the package will:
-    - Download the docker image (takes a while, you shoud receive a notification from Container Manager when done)
-    - Create a Docker container in the Container Manager. This container will be read-only and named `github-runner`
-    - Behave as a regular Package, allowing you to start/stop it from the Package Center.
+    ```bash
+    sudo /var/packages/GithubRunner/scripts/elevate
+    ```
+
+    The command shows exactly what it is approving (image, container name, privileged mode, volume bindings) before doing anything. It then installs a root-owned broker restricted to managing this package's container — the package itself keeps running as its unprivileged user. See the [elevation documentation](https://github.com/tomgrv/synology-package-builder/blob/main/doc/elevated.md) for the full security model.
+
+6. After approval, the package will:
+    - Download the docker image (takes a while)
+    - Create a Docker container in the Container Manager, named `github-runner`
+    - Behave as a regular package, allowing you to start/stop it from the Package Center.
+
+The approval survives package upgrades. When an upgrade ships a new runner image, the package asks you to re-run the command above to review and approve the change. Uninstalling the package removes the container and revokes the approval entirely.
+
+## Security notes
+
+- The runner container mounts the Docker socket, which is equivalent to root access on the NAS: only register it against an organisation or repositories you trust, and prefer a fine-grained token restricted to runner registration.
+- The access token is only used to register the runner; it is stored in the package home and in the approved container profile, both readable by root and the package user only.
 
 ## Credits
 
